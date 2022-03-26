@@ -1,0 +1,5 @@
+# ignore database
+*.sqlite3
+
+#ingnore shortcuts
+*.lnk
