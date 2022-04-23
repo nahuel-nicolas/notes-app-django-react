@@ -1,5 +1,6 @@
-# ignore database
+*.pyc
+__pycache__/
+venv/
 *.sqlite3
-
-#ingnore shortcuts
 *.lnk
+*.code-workspace
