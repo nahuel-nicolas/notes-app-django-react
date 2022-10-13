@@ -2,11 +2,12 @@ import { useState, useEffect } from "react"
 import * as utilities from './utilities'
 import { Link } from "react-router-dom"
 import NoteListItem from "./NoteListItem"
+import { notes_api_url } from './settings'
 
 const NoteList = () => {
     const [noteListData, setNoteListData] = useState(null)
     useEffect(() => {
-        utilities.fetch_and_set('http://127.0.0.1:8000/notes/', setNoteListData)
+        utilities.fetch_and_set(notes_api_url, setNoteListData)
     }, [])
     let valueToReturn;
     if (noteListData == null) {

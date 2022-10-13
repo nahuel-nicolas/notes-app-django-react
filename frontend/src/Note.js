@@ -2,8 +2,7 @@ import { useState, useEffect, createContext } from "react"
 import * as utilities from './utilities'
 import { useParams, useNavigate } from 'react-router-dom'
 import Box from "./Box/Box"
-
-const notes_api_url = 'http://127.0.0.1:8000/notes/'
+import { notes_api_url } from './settings'
 
 function isNoteBodyChanged(initialNoteBody, currentNoteBody) {
     return initialNoteBody != currentNoteBody
