@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  django:
+    image: python:3.10-alpine
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - ./backend:/backend
+    command: >
+      sh -c "cd /backend &&
+            echo '>>> INSTALLING REQUIREMENTS <<<' &&
+            echo '' &&
+            pip install -r requirements.txt &&
+            echo '' &&
+            echo '>>> RUNNING MIGRATIONS <<<' &&
+            echo '' &&
+            python manage.py migrate &&
+            echo '' &&
+            echo '>>> STARTING SERVICE <<<' &&
+            echo '' &&
+            python manage.py runserver 0.0.0.0:8000"
+
+  node:
+    image: node:12.22.12-alpine3.15
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/frontend
+    command: >
+      sh -c "cd /frontend &&
+            echo '>>> INSTALLING NODE MODULES <<<' &&
+            echo '' &&
+            npm i &&
+            echo '' &&
+            echo '>>> STARTING SERVICE <<<' &&
+            echo '' &&
+            npm start"
+    depends_on:
+      - django
